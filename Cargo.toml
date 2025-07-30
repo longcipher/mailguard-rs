@@ -1,0 +1,43 @@
+[package]
+name = "mailguard-rs"
+description = "A fast temporary email and malicious domain detection library using SURBL DNS queries"
+version = "0.1.0"
+authors = ["longcipher"]
+edition = "2024"
+license = "Apache-2.0"
+repository = "https://github.com/longcipher/mailguard-rs"
+homepage = "https://github.com/longcipher/mailguard-rs"
+readme = "README.md"
+keywords = ["email", "spam", "security", "validation", "dns"]
+categories = ["network-programming", "email", "web-programming"]
+
+[package.metadata.docs.rs]
+all-features = true
+rustdoc-args = ["--cfg", "docsrs"]
+
+[package.metadata.cargo-machete]
+ignored = ["lru"]
+
+[[example]]
+name = "simple_usage"
+path = "examples/simple_usage.rs"
+
+[[example]]
+name = "advanced_usage"
+path = "examples/advanced_usage.rs"
+
+[dependencies]
+lru = { version = "0.16", optional = true }
+regex = "1.0"
+serde = { version = "1.0", features = ["derive"] }
+thiserror = "2.0"
+tokio = { version = "1.0", features = ["full"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+trust-dns-resolver = "0.23"
+
+[features]
+default = []
+cache = ["lru"]
+# Future feature flags can go here
+# metrics = ["prometheus"]
